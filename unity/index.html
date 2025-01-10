@@ -94,7 +94,9 @@
         // To lower canvas resolution on mobile devices to gain some
         // performance, uncomment the following line:
         // config.devicePixelRatio = 1;
-
+        canvas.style.width = "100vw";
+        canvas.style.height = "100vh";
+        config.devicePixelRatio = 3;
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
