@@ -87,14 +87,23 @@
 
           // Telegram Web App API
           if (window.Telegram && window.Telegram.WebApp) {
-            // Request fullscreen and expand upon start
-            window.Telegram.WebApp.expand();
-            window.Telegram.WebApp.MainButton.setText("Fullscreen").show();
-            window.Telegram.WebApp.MainButton.onClick(() => {
-              unityInstance.SetFullscreen(1);
-            });
-          }
+            const webApp = window.Telegram.WebApp;
+            webApp.ready();
 
+            try {
+              if (webApp.requestFullscreen) {
+                webApp.requestFullscreen();
+                console.log("Приложение переведено в полноэкранный режим");
+              }
+
+              if (webApp.expand) {
+                webApp.expand();
+                console.log("Расширяем приложение до максимальной высоты");
+              }
+            } catch (error) {
+              console.error("Ошибка при управлении экраном:", error);
+            }
+          }
         }).catch((message) => {
           alert(message);
         });
